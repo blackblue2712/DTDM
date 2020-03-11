@@ -16,7 +16,7 @@
         <input type="submit" name="submit" value="Submit">
     </form>
 
-
+    <a href="index.php">Back</a>
 </body>
 </html>
 
@@ -35,14 +35,17 @@
         echo "Opend database successfully \n";
     }
 
-    $sql = "INSERT INTO MyAccounts (username, password) VALUES ('$username', '$password')";
-    print "<br>$sql<br>";
-    $ret = pg_query($db, $sql);
-    if(!$ret) {
-        echo pg_last_error($db);
-    } else {
-        echo "Insert ss \n";
+    if(isset($_POST["submit"])) {
+        $sql = "INSERT INTO MyAccounts (username, password) VALUES ('$username', '$password')";
+        print "<br>$sql<br>";
+        $ret = pg_query($db, $sql);
+        if(!$ret) {
+            echo pg_last_error($db);
+        } else {
+            echo "Insert ss \n";
+        }
+    
+        pg_close($db);
     }
-
-    pg_close($db);
 ?>
+
